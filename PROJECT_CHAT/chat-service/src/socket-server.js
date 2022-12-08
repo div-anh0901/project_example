@@ -21,25 +21,7 @@ module.exports = (server) => {
         }
     });
 
-    io.use(async (socket, next) => {
-        var token = socket.handshake.headers.authorization;
-        if (token != undefined) {
-            try {
-                var result = await axios.get(url + "/api/user/getFriendByUserId", {
-                    headers: {
-                        Authorization: token
-                    }
-                });
-                var friends = result.data.msg.members;
-                for (var i = 0; i < friends.length; i++) {
-                    arrFriend.push(friends[i])
-                }
-            } catch (err) {
-                console.log(err)
-            }
-        }
-        next();
-    });
+
 
     io.on('connection', (socket) => {
         console.log("socket id : " + socket.id)
