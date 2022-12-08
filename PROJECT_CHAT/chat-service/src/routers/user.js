@@ -1,0 +1,13 @@
+const express = require('express');
+const router = express.Router();
+const userContrller = require('../controller/userContrller');
+const verifyToken = require('../middleware/verifyToken');
+router.get('/allUsers', userContrller.getAllUser);
+router.post('/addFriend', verifyToken, userContrller.addFriend);
+router.post('/newConvasation', userContrller.newConversation);
+router.get('/getConvasation', verifyToken, userContrller.getOneConvasation);
+router.get('/getUserById/:id', userContrller.getUserById);
+router.put('/changeSendStatus/:friendId', verifyToken, userContrller.sendChangeStatus);
+router.get('/getFriendByUserId', verifyToken, userContrller.getFriendByUserId);
+router.put('/changeReceiverStatus', verifyToken, userContrller.receiverChangeStatus);
+module.exports = router;
